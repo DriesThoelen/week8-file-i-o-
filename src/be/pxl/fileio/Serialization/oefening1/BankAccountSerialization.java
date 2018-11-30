@@ -7,9 +7,9 @@ import java.nio.file.Paths;
 public class BankAccountSerialization {
 
     public static void main(String[] args) {
-        BankAccount bankAccount = new BankAccount("Nele Custers", "0489/12.34.56", "Lectorstraat 1", 0);
-        writeBankAccount(bankAccount);
-        BankAccount bankAccount2 = readBankAccount();
+        //BankAccount bankAccount = new BankAccount("Nele Custers", "0489/12.34.56", "Lectorstraat 1", 0);
+        transferMoney("REK001", 500);
+        BankAccount bankAccount = readBankAccount();
         System.out.println(bankAccount);
     }
 
@@ -31,5 +31,13 @@ public class BankAccountSerialization {
         } catch(IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void transferMoney(String accountnumber, double amount) {
+        BankAccount bankAccount = readBankAccount();
+        if (bankAccount.getAccountnumber().equals(accountnumber)) {
+            bankAccount.setBalance(bankAccount.getBalance() + amount);
+        }
+        writeBankAccount(bankAccount);
     }
 }
